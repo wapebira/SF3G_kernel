@@ -1,0 +1,9 @@
+Required Properties :
+- compatible: Must be "silicon touch,vm149C-v4l2-i2c-subdev"
+
+Example:
+
+afc0: af-controller@0 {
+		compatible = "silicon touch,vm149C-v4l2-i2c-subdev";
+		reg = < 0x0c >;
+};

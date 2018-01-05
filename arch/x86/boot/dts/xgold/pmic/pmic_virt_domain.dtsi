@@ -1,0 +1,287 @@
+#include <dt-bindings/pmic/pmic.h>
+
+pmic_virt_domain: pmic_virt_domain {
+	status = "okay";
+	compatible = "rockchip,virt_domain";
+	virt_domain {
+		vddp_mmc_reg {
+			virt-domain = <PMIC_VDDP_MMC>;
+			pmu-domain = <PMIC_DOMAIN_LMMC1>;
+		};
+
+		vddp_mmc_td_reg {
+			virt-domain = <PMIC_VDDP_MMC_TD>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_vemmc_reg {
+			virt-domain = <PMIC_VDD_VEMMC>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_sdio_reg {
+			virt-domain = <PMIC_VDD_SDIO>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_touchscreen_reg {
+			virt-domain = <PMIC_VDD_TOUCHSCREEN>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_emic_1v8_io_reg {
+			virt-domain = <PMIC_VDD_EMIC_1V8_IO>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_mipi_csi_reg {
+			virt-domain = <PMIC_VDD_MIPI_CSI>;
+			pmu-domain = <PMIC_DOMAIN_LMIPI>;
+		};
+
+		vdd_mipi_dsi_reg {
+			virt-domain = <PMIC_VDD_MIPI_DSI>;
+			pmu-domain = <PMIC_DOMAIN_LMIPI>;
+		};
+
+		vdd_digrf1_reg {
+			virt-domain = <PMIC_VDD_DIGRF1>;
+			pmu-domain = <PMIC_DOMAIN_LMIPI>;
+		};
+
+		vdd_usb_1v1_reg {
+			virt-domain = <PMIC_VDD_USB_1V1>;
+			pmu-domain = <PMIC_DOMAIN_LAIF>;
+		};
+
+		vdd_emic_core_reg {
+			virt-domain = <PMIC_VDD_EMIC_CORE>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_emic_dll_reg {
+			virt-domain = <PMIC_VDD_EMIC_DLL>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_LDO3>;
+		};
+
+		vdd_idi_rx_reg {
+			virt-domain = <PMIC_VDD_IDI_RX>;
+			pmu-domain = <PMIC_DOMAIN_LAIF>;
+		};
+
+		vdd_usb_3v3_reg {
+			virt-domain = <PMIC_VDD_USB_3V3>;
+			pmu-domain = <PMIC_DOMAIN_LUSB>;
+		};
+
+		vddp_sim_reg {
+			virt-domain = <PMIC_VDDP_SIM>;
+			pmu-domain = <PMIC_DOMAIN_LSIM1>;
+		};
+
+		vddp_sim2_reg {
+			virt-domain = <PMIC_VDDP_SIM2>;
+			pmu-domain = <PMIC_DOMAIN_LSIM2>;
+		};
+
+		vdd_pll_reg {
+			virt-domain = <PMIC_VDD_PLL>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_io_volt_touch_sensor_reg {
+			virt-domain = <PMIC_VDD_IO_VOLT_TOUCH_SENSOR>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_io_volt_proximity_sensor_reg {
+			virt-domain = <PMIC_VDD_IO_VOLT_PROXIMITY_SENSOR>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_io_volt_accelerometer_reg {
+			virt-domain = <PMIC_VDD_IO_VOLT_ACCELEROMETER>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_io_volt_magnetometer_reg {
+			virt-domain = <PMIC_VDD_IO_VOLT_MAGNETOMETER>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_io_volt_gyroscope_reg {
+			virt-domain = <PMIC_VDD_IO_VOLT_GYROSCOPE>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_cam_prim_analog_reg {
+			virt-domain = <PMIC_VDD_CAM_PRIM_ANALOG>;
+			pmu-domain = <PMIC_DOMAIN_LAUX1>;
+		};
+
+		vdd_cam_sec_analog_reg {
+			virt-domain = <PMIC_VDD_CAM_SEC_ANALOG>;
+			pmu-domain = <PMIC_DOMAIN_LAUX1>;
+		};
+
+		vdd_prim_display_reg {
+			virt-domain = <PMIC_VDD_PRIM_DISPLAY>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_VSWOUT>;
+		};
+
+		vdd_touch_sensor_reg {
+			virt-domain = <PMIC_VDD_TOUCH_SENSOR>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_proximity_sensor_reg {
+			virt-domain = <PMIC_VDD_PROXIMITY_SENSOR>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_accelerometer_reg {
+			virt-domain = <PMIC_VDD_ACCELEROMETER>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_magnetometer_reg {
+			virt-domain = <PMIC_VDD_MAGNETOMETER>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_gyroscope_reg {
+			virt-domain = <PMIC_VDD_GYROSCOPE>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_emic_io_reg {
+			virt-domain = <PMIC_VDD_EMIC_IO>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_abb_gnss_tcxo_ldo_reg {
+			virt-domain = <PMIC_VDD_ABB_GNSS_TCXO_LDO>;
+			pmu-domain = <PMIC_DOMAIN_GNSS_TCXO_LDO>;
+		};
+
+		vddp_vemmc_p_reg {
+			virt-domain = <PMIC_VDDP_VEMMC_P>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_cam_prim_digital_reg {
+			virt-domain = <PMIC_VDD_CAM_PRIM_DIGITAL>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_cam_prim_io_reg {
+			virt-domain = <PMIC_VDD_CAM_PRIM_IO>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_cam_prim_af_reg {
+			virt-domain = <PMIC_VDD_CAM_PRIM_AF>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_cam_sec_digital_reg {
+			virt-domain = <PMIC_VDD_CAM_SEC_DIGITAL>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_cam_sec_io_reg {
+			virt-domain = <PMIC_VDD_CAM_SEC_IO>;
+			pmu-domain = <PMIC_DOMAIN_LAUX2>;
+		};
+
+		vdd_cam_sec_af_reg {
+			virt-domain = <PMIC_VDD_CAM_SEC_AF>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_prim_disp_backlight_reg {
+			virt-domain = <PMIC_VDD_PRIM_DISP_BACKLIGHT>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_sd_card_reg {
+			virt-domain = <PMIC_VDD_SD_CARD>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_LDO8>;
+		};
+
+		vdd_emmc_reg {
+			virt-domain = <PMIC_VDD_EMMC>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_BUCK4>;
+		};
+
+		vdd_vcpu_reg {
+			virt-domain = <PMIC_VDD_VCPU>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_BUCK1>;
+		};
+
+		vdd_lvds_1v8_reg {
+			virt-domain = <PMIC_VDD_LVDS_1V8>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_LDO2>;
+		};
+
+		vdd_h_5v_reg {
+			virt-domain = <PMIC_VDD_H_5V>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_BOOST>;
+		};
+
+		vdd_h_3v3_reg {
+			virt-domain = <PMIC_VDD_H_3V3>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_gpu_reg {
+			virt-domain = <PMIC_VDD_GPU>;
+			pmu-domain = <PMIC_DOMAIN_PMIC_BUCK2>;
+		};
+
+		vdd_emic_reg_reg {
+			virt-domain = <PMIC_VDD_EMIC_RET>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_lcd_dsi_reg {
+			virt-domain = <PMIC_VDD_LCD_DSI>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_gps_2v5_reg {
+			virt-domain = <PMIC_VDD_GPS_2V5>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_dif_lcd_rgb_reg {
+			virt-domain = <PMIC_VDD_DIF_LCD_RGB>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_otg_5v_reg {
+			virt-domain = <PMIC_VDD_OTG_5V>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_spec_pow_ctrl_1_reg {
+			virt-domain = <PMIC_VDD_SPECIAL_POW_1>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_spec_pow_ctrl_2_reg {
+			virt-domain = <PMIC_VDD_SPECIAL_POW_2>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_spec_pow_ctrl_3_reg {
+			virt-domain = <PMIC_VDD_SPECIAL_POW_3>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+
+		vdd_deprecated_reg {
+			virt-domain = <PMIC_VDD_DEPRECATED>;
+			pmu-domain = <PMIC_DOMAIN_NOTCFG>;
+		};
+	};
+};

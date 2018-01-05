@@ -1,0 +1,10 @@
+#
+# Makefile for industrial I/O Magnetometer sensors
+#
+obj-$(CONFIG_COMPASS_AK8975_ARM)	+= ak8975.o
+obj-$(CONFIG_COMPASS_AK8975_X86)	+= ak8975_x86.o
+obj-$(CONFIG_COMPASS_AK8963_ARM)	+= ak8963.o
+obj-$(CONFIG_COMPASS_AK8963_X86)	+= ak8963_x86.o
+obj-$(CONFIG_COMPASS_AK09911_ARM)	+= ak09911.o
+obj-$(CONFIG_COMPASS_AK09911_X86)	+= ak09911_x86.o
+obj-$(CONFIG_COMPASS_MMC328X)	+= mmc328x.o

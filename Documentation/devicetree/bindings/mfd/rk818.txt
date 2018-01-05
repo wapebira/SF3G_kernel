@@ -1,0 +1,41 @@
+RK818 Power Management Integrated Circuit
+
+Required properties:
+- compatible: "rockchip,rk818"
+- reg: here use vmm i2c, don't need 
+- interrupt-parent: The parent interrupt controller.
+- interrupts: the interrupt outputs of the controller.
+- pinctrl-names, pinctrl-0, pinctrl-1,pinctrl-2: See <Documentation/devicetree/bindings/pinctrl/pinctrl-bindings.txt> for detail.
+- ocv_table: depend on the battery used
+- design_capacity: depend on the battery used
+- design_qmax: depend on the battery used
+- max_overcharge: depend on rk818 spec
+- max_charge_currentmA: depend on rk818 spec
+- max_charge_voltagemV: depend on rk818 spec
+- max_bat_voltagemV: depend on the battery used
+- sleep_enter_current: depend on rk818 spec
+- sleep_exit_current: depend on rk818 spec
+
+
+Example:
+rk818  {
+		compatible = "rockchip,rk818";
+		status = "okay";
+		interrupt-parent = <&eint>;
+		interrupts = < EINT_EXI3 XGOLD_IRQ_TYPE_EDGE_FALLING >;
+		pinctrl-names = "default", "sleep", "inactive";
+		pinctrl-0 = <&pmu_default_pins>;
+		pinctrl-1 = <&pmu_sleep_pins>;
+		pinctrl-2 = <&pmu_inactive_pins>;
+		battery {
+			ocv_table = <3350 3677 3693 3719 3752 3770 3775 3778 3785 3796 3812 3839 3881 3907 3933 3958 3978 4033 4087 4123 4174>;
+			design_capacity = <4000>;
+			design_qmax = <4100>;
+			max_overcharge = <100>;
+			max_charge_currentmA = <1500>;
+			max_charge_voltagemV = <4260>;
+			max_bat_voltagemV = <4200>;
+			sleep_enter_current = <150>;
+			sleep_exit_current = <180>;
+		};
+	};

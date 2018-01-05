@@ -1,0 +1,842 @@
+/*
+ * sofia: lcd-mipi_otm1287a_auo_lp055apkp153a.dtsi
+ * definition at "include/dt-bindings/sofiafb/sofia_fb.h"
+ */
+
+	display-timings {
+		native-mode = <&timing0>;
+		timing0: timing0 {
+			screen-type = <SCREEN_MIPI>;
+			out-face = <OUT_P888>;
+			color-mode = <COLOR_RGB>;
+			clock-frequency = <65469250>;
+			hactive = <720>;
+			vactive = <1280>;
+			hback-porch = <80>;
+			hfront-porch = <80>;
+			hsync-len = <15>;
+			vback-porch = <20>;
+			vfront-porch = <20>;
+			vsync-len = <10>;
+			hsync-active = <0>;
+			vsync-active = <0>;
+			de-active = <0>;
+			pixelclk-active = <0>;
+			swap-rb = <0>;
+			swap-rg = <0>;
+			swap-gb = <0>;
+		};
+	};
+
+	display-panel0 {
+		compatible = "intel,display";
+
+		/* intel,display-ramless = <1>; */
+		intel,display-fps = <55>;
+		intel,display-dc-clkrate = <297000000>;
+		intel,display-if-nblanes = <4>;
+		intel,display-vid-mode = "burst";
+		intel,display-vid-id = <0>;
+		/*intel,display-vid-pixel = "24packed";*/
+		intel,display-eot = <1>;
+		intel,display-gate = <1>;
+
+		gpio-power-on {
+			power_en {
+				intel,gpio-type = "vhigh";
+				intel,gpio-value-delay = <1 0>;
+			};
+			reset1 {
+				intel,gpio-type = "reset";
+				intel,gpio-value-delay = <0 5>;
+			};
+			reset2 {
+				intel,gpio-type = "reset";
+				intel,gpio-value-delay = <1 10>;
+			};
+		};
+
+		gpio-power-off {
+			reset {
+				intel,gpio-type = "reset";
+				intel,gpio-value-delay = <0 20>;
+			};
+			power_en {
+				intel,gpio-type = "vhigh";
+				intel,gpio-value-delay = <0 10>;
+			};
+		};
+
+		cmd-init {
+			cmd1 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd2 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xff 0x12 0x87 0x01>;
+				intel,cmd-lp = <1>;
+			};
+			cmd3 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd4 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xff 0x12 0x87>;
+				intel,cmd-lp = <1>;
+			};
+			cmd5 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x92>;
+				intel,cmd-lp = <1>;
+			};
+			cmd6 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xff 0x30 0x02>;
+				intel,cmd-lp = <1>;
+			};
+			cmd7 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd8 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc1 0x02>;
+				intel,cmd-lp = <1>;
+			};
+			cmd9 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA6>;
+				intel,cmd-lp = <1>;
+			};
+			cmd10 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xb3 0x0F>;
+				intel,cmd-lp = <1>;
+			};
+			cmd11 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd12 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc0 0x00 0x64 0x00 0x10 0x10 0x00 0x64 0x10 0x10>;
+				intel,cmd-lp = <1>;
+			};
+			cmd13 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd14 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc0 0x00 0x5c 0x00 0x01 0x00 0x04>;
+				intel,cmd-lp = <1>;
+			};
+			cmd15 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA2>;
+				intel,cmd-lp = <1>;
+			};
+			cmd16 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc0 0x01 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd17 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb3>;
+				intel,cmd-lp = <1>;
+			};
+			cmd18 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc0 0x00 0x55>;
+				intel,cmd-lp = <1>;
+			};
+			cmd19 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x81>;
+				intel,cmd-lp = <1>;
+			};
+			cmd20 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc1 0x55>;
+				intel,cmd-lp = <1>;
+			};
+			cmd21 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd22 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc4 0x05 0x10 0x04 0x02 0x05 0x15 0x11 0x05 0x10 0x07 0x02 0x05 0x15 0x11>;
+				intel,cmd-lp = <1>;
+			};
+			cmd23 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd24 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc4 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd25 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x91>;
+				intel,cmd-lp = <1>;
+			};
+			cmd26 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xc5 0x29 0x52>;
+				intel,cmd-lp = <1>;
+			};
+			cmd27 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd28 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xD8 0xBE 0xBE>;
+				intel,cmd-lp = <1>;
+			};
+			cmd29 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd30 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xD9 0x50>;
+				intel,cmd-lp = <1>;
+			};
+			cmd31 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb3>;
+				intel,cmd-lp = <1>;
+			};
+			cmd32 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc5 0x84>;
+				intel,cmd-lp = <1>;
+			};
+			cmd33 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xbb>;
+				intel,cmd-lp = <1>;
+			};
+			cmd34 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc5 0x8A>;
+				intel,cmd-lp = <1>;
+			};
+			cmd35 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x82>;
+				intel,cmd-lp = <1>;
+			};
+			cmd36 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xC4 0x0A>;
+				intel,cmd-lp = <1>;
+			};
+			cmd37 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xC6>;
+				intel,cmd-lp = <1>;
+			};
+			cmd38 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xB0 0x03>;
+				intel,cmd-lp = <1>;
+			};
+			cmd39 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd40 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xD0 0x40>;
+				intel,cmd-lp = <1>;
+			};
+			cmd41 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd42 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xD1 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd43 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd44 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc4 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd45 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x98>;
+				intel,cmd-lp = <1>;
+			};
+			cmd46 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc5 0x10>;
+				intel,cmd-lp = <1>;
+			};
+			cmd47 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x81>;
+				intel,cmd-lp = <1>;
+			};
+			cmd48 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd49 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x83>;
+				intel,cmd-lp = <1>;
+			};
+			cmd50 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd51 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x85>;
+				intel,cmd-lp = <1>;
+			};
+			cmd52 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd53 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x87>;
+				intel,cmd-lp = <1>;
+			};
+			cmd54 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd55 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x89>;
+				intel,cmd-lp = <1>;
+			};
+			cmd56 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd57 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x8B>;
+				intel,cmd-lp = <1>;
+			};
+			cmd58 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd59 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x95>;
+				intel,cmd-lp = <1>;
+			};
+			cmd60 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd61 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x97>;
+				intel,cmd-lp = <1>;
+			};
+			cmd62 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd63 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x99>;
+				intel,cmd-lp = <1>;
+			};
+			cmd64 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd65 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA1>;
+				intel,cmd-lp = <1>;
+			};
+			cmd66 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd67 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA3>;
+				intel,cmd-lp = <1>;
+			};
+			cmd68 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd69 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA5>;
+				intel,cmd-lp = <1>;
+			};
+			cmd70 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd71 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xA7>;
+				intel,cmd-lp = <1>;
+			};
+			cmd72 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd73 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xAB>;
+				intel,cmd-lp = <1>;
+			};
+			cmd74 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xF5 0x18>;
+				intel,cmd-lp = <1>;
+			};
+			cmd75 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x94>;
+				intel,cmd-lp = <1>;
+			};
+			cmd76 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xF5 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd77 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xd2>;
+				intel,cmd-lp = <1>;
+			};
+			cmd78 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xf5 0x06 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd79 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb2>;
+				intel,cmd-lp = <1>;
+			};
+			cmd80 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xf5 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd81 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb6>;
+				intel,cmd-lp = <1>;
+			};
+			cmd82 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xf5 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd83 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb4>;
+				intel,cmd-lp = <1>;
+			};
+			cmd84 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xC5 0xCC>;
+				intel,cmd-lp = <1>;
+			};
+			cmd85 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd86 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xf5 0x02 0x11 0x02 0x15>;
+				intel,cmd-lp = <1>;
+			};
+			cmd87 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd88 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc5 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd89 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x94>;
+				intel,cmd-lp = <1>;
+			};
+			cmd90 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0xc5 0x55>;
+				intel,cmd-lp = <1>;
+			};
+			cmd91 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd92 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd93 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd94 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0xff 0x00 0xff 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd95 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd96 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0xff 0x00 0xff 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd97 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd98 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x00 0x00 0x00 0xff 0x00 0xff 0x00 0xff 0x00 0xff 0x00 0x00 0x00 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd99 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xc0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd100 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x05 0x05 0x00 0x05 0x05 0x05 0x05 0x05>;
+				intel,cmd-lp = <1>;
+			};
+			cmd101 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xd0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd102 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x05 0x05 0x05 0x05 0x05 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x05>;
+				intel,cmd-lp = <1>;
+			};
+			cmd103 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xe0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd104 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0x05 0x00 0x05 0x05 0x05 0x05 0x05 0x05 0x05 0x05 0x05 0x05 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd105 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xf0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd106 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcb 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff>;
+				intel,cmd-lp = <1>;
+			};
+			cmd107 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd108 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x05 0x07 0x00 0x0d 0x09 0x0f 0x0b 0x11>;
+				intel,cmd-lp = <1>;
+			};
+			cmd109 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd110 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x15 0x13 0x17 0x01 0x03 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x06>;
+				intel,cmd-lp = <1>;
+			};
+			cmd111 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd112 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x08 0x00 0x0e 0x0a 0x10 0x0c 0x12 0x16 0x14 0x18 0x02 0x04 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd113 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd114 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x04 0x02 0x00 0x0c 0x10 0x0a 0x0e 0x14>;
+				intel,cmd-lp = <1>;
+			};
+			cmd115 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xc0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd116 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x18 0x12 0x16 0x08 0x06 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x03>;
+				intel,cmd-lp = <1>;
+			};
+			cmd117 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xd0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd118 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcc 0x01 0x00 0x0b 0x0f 0x09 0x0d 0x13 0x17 0x11 0x15 0x07 0x05 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd119 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd120 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x87 0x03 0x28 0x86 0x03 0x28 0x85 0x03 0x28 0x84 0x03 0x28>;
+				intel,cmd-lp = <1>;
+			};
+			cmd121 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd122 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x34 0xfc 0x28 0x34 0xfd 0x28 0x34 0xfe 0x28 0x34 0xff 0x28 0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd123 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd124 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x38 0x07 0x05 0x00 0x00 0x28 0x00 0x38 0x06 0x05 0x01 0x00 0x28 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd125 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd126 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x38 0x05 0x05 0x02 0x00 0x28 0x00 0x38 0x04 0x05 0x03 0x00 0x28 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd127 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xc0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd128 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x38 0x03 0x05 0x04 0x00 0x28 0x00 0x38 0x02 0x05 0x05 0x00 0x28 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd129 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xd0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd130 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xce 0x38 0x01 0x05 0x06 0x00 0x28 0x00 0x38 0x00 0x05 0x07 0x00 0x28 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd131 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x80>;
+				intel,cmd-lp = <1>;
+			};
+			cmd132 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcf 0x38 0x07 0x05 0x00 0x00 0x18 0x25 0x38 0x06 0x05 0x01 0x00 0x18 0x25>;
+				intel,cmd-lp = <1>;
+			};
+			cmd133 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x90>;
+				intel,cmd-lp = <1>;
+			};
+			cmd134 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcf 0x38 0x05 0x05 0x02 0x00 0x18 0x25 0x38 0x04 0x05 0x03 0x00 0x18 0x25>;
+				intel,cmd-lp = <1>;
+			};
+			cmd135 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xa0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd136 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcf 0x38 0x03 0x05 0x04 0x00 0x18 0x25 0x38 0x02 0x05 0x05 0x00 0x18 0x25>;
+				intel,cmd-lp = <1>;
+			};
+			cmd137 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xb0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd138 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcf 0x38 0x01 0x05 0x06 0x00 0x18 0x25 0x38 0x00 0x05 0x07 0x00 0x18 0x25>;
+				intel,cmd-lp = <1>;
+			};
+			cmd139 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0xc0>;
+				intel,cmd-lp = <1>;
+			};
+			cmd140 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xcf 0x01 0x01 0x20 0x20 0x00 0x00 0x01 0x81 0x00 0x03 0x08>;
+				intel,cmd-lp = <1>;
+			};
+			cmd141 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd142 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xE1 0x08 0x18 0x23 0x2f 0x3f 0x4c 0x4e 0x7b 0x6f 0x8b 0x76 0x5f 0x6e 0x4a 0x46 0x3a 0x2d 0x20 0x16 0x10>;
+				intel,cmd-lp = <1>;
+			};
+			cmd143 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd144 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xE2 0x08 0x18 0x23 0x2f 0x3f 0x4c 0x4e 0x7b 0x6f 0x8b 0x76 0x5f 0x6e 0x4a 0x46 0x3a 0x2d 0x20 0x16 0x10>;
+				intel,cmd-lp = <1>;
+			};
+			cmd145 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x00 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd146 {
+				intel,cmd-type = <0x39>;
+				intel,cmd-data = <0xff 0xff 0xff 0xff>;
+				intel,cmd-lp = <1>;
+			};
+			cmd147 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x36 0x00>;
+				intel,cmd-lp = <1>;
+			};
+			cmd148 {
+				intel,cmd-type = <0x15>;
+				intel,cmd-data = <0x35 0x00>;
+				intel,cmd-lp = <1>;
+			};
+		};
+
+		cmd-sleep-in {
+			display-off {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x28>;
+				intel,cmd-delay = <20>;
+				intel,cmd-lp = <1>;
+			};
+			sleep-in {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x10>;
+				intel,cmd-delay = <10>;
+				intel,cmd-lp = <1>;
+			};
+		};
+
+		cmd-sleep-out {
+			sleep-out {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x11>;
+				intel,cmd-delay = <20>;
+				intel,cmd-lp = <1>;
+			};
+			display-on {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x29>;
+				intel,cmd-delay = <10>;
+				intel,cmd-lp = <1>;
+			};
+		};
+	};

@@ -1,0 +1,84 @@
+/*
+ * sofia. lcd-mipi_nt51011.dtsi
+ * this file include the definition about screen timing and init msg
+ * macro definition at "include/dt-bindings/sofiafb/sofia_fb.h"
+ */
+
+	display-timings {
+		native-mode = <&timing0>;
+		timing0: timing0 {
+			screen-type = <SCREEN_MIPI>;
+			out-face    = <OUT_P888>;
+			color-mode = <COLOR_RGB>;
+			width = <172>;
+			height = <108>;
+			clock-frequency = <70890000>;
+			hactive = <1024>;
+			vactive = <600>;
+			hback-porch = <50>;
+			hfront-porch = <50>;
+			hsync-len = <10>;
+			vback-porch = <20>;
+			vfront-porch = <20>;
+			vsync-len = <10>;
+			hsync-active = <0>;
+			vsync-active = <0>;
+			de-active = <0>;
+			pixelclk-active = <0>;
+			swap-rb = <0>;
+			swap-rg = <0>;
+			swap-gb = <0>;
+		};
+	};
+
+	display-panel0 {
+		compatible = "intel,display";
+
+		/* intel,display-ramless = <1>; */
+		intel,display-fps = <60>;
+		intel,display-dc-clkrate = <297000000>;
+		intel,display-if-nblanes = <4>;
+		intel,display-vid-mode = "burst";
+		intel,display-vid-id = <0>;
+		intel,display-eot = <1>;
+		intel,display-gate = <1>;
+
+		/* cmd-init { */
+			/*
+			 * write init cmds here,if sleep out and display on cmd
+			 * are repeatted at cmd-sleep-out dt node,the sleep-out
+			 * and display-on cmd are no need to be wirted here.
+			 */
+		/* }; */
+
+		cmd-sleep-in {
+			display-off {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x28>;
+				intel,cmd-delay = <120>;
+				intel,cmd-lp = <1>;
+			};
+			sleep-in {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x10>;
+				intel,cmd-delay = <20>;
+				intel,cmd-lp = <1>;
+			};
+		};
+
+		cmd-sleep-out {
+			/* pls modify cmd-delay according to lcd datasheet */
+			sleep-out {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x11>;
+				intel,cmd-delay = <120>;
+				intel,cmd-lp = <1>;
+			};
+			display-on {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x29>;
+				intel,cmd-delay = <120>;
+				intel,cmd-lp = <1>;
+			};
+		};
+	};

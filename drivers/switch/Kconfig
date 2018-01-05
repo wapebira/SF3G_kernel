@@ -1,0 +1,21 @@
+menuconfig SWITCH
+	tristate "Switch class support"
+	help
+	  Say Y here to enable switch class support. This allows
+	  monitoring switches by userspace via sysfs and uevent.
+
+if SWITCH
+
+config SWITCH_GPIO
+	tristate "GPIO Swith support"
+	depends on GPIOLIB
+	help
+	  Say Y here to enable GPIO based switch support.
+
+config SWITCH_XGOLD
+	bool "Configure XGOLD switch driver for XGOLD (headset)"
+	depends on SND_SOC_XGOLD_MACHINE
+	help
+	  Say Y here to enable XGOLD Switch driver (for headset)
+
+endif # SWITCH

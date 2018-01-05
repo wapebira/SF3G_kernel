@@ -1,0 +1,169 @@
+#!/bin/sh
+
+# Description: Script to build the SOCWatch driver
+# Version: 1.0
+
+# ***********************************************************************************************
+
+ # This file is provided under a dual BSD/GPLv2 license.  When using or 
+ # redistributing this file, you may do so under either license.
+
+  # GPL LICENSE SUMMARY
+
+  # Copyright(c) 2011 Intel Corporation. All rights reserved.
+
+  # This program is free software; you can redistribute it and/or modify 
+  # it under the terms of version 2 of the GNU General Public License as
+  # published by the Free Software Foundation.
+
+  # This program is distributed in the hope that it will be useful, but 
+  # WITHOUT ANY WARRANTY; without even the implied warranty of 
+  # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+  # General Public License for more details.
+
+  # You should have received a copy of the GNU General Public License 
+  # along with this program; if not, write to the Free Software 
+  # Foundation, Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+  # The full GNU General Public License is included in this distribution 
+  # in the file called LICENSE.GPL.
+
+  # Contact Information:
+  # SOCWatch Developer Team <socwatchdevelopers@intel.com>
+
+  # BSD LICENSE 
+
+  # Copyright(c) 2011 Intel Corporation. All rights reserved.
+  # All rights reserved.
+
+  # Redistribution and use in source and binary forms, with or without 
+  # modification, are permitted provided that the following conditions 
+  # are met:
+
+  #   * Redistributions of source code must retain the above copyright 
+  #     notice, this list of conditions and the following disclaimer.
+  #   * Redistributions in binary form must reproduce the above copyright 
+  #     notice, this list of conditions and the following disclaimer in 
+  #     the documentation and/or other materials provided with the 
+  #     distribution.
+  #   * Neither the name of Intel Corporation nor the names of its 
+  #     contributors may be used to endorse or promote products derived 
+  #     from this software without specific prior written permission.
+
+  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+  # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+  # A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+  # OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  # SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+  # LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+  # DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
+  # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+  # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+  # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  # ***********************************************************************************************
+
+MAKE="make"
+MAKEFILE_NAME="Makefile"
+
+KERNEL_BUILD_DIR=""
+KERNEL_BUILD_DIR="/home/kever/src/kernel-sofia/"
+#KERNEL_BUILD_DIR="/localdisk2/jchheda/tar_balls/es2.0/DEV_SOFIA_3G_FSY_01.1445.01_03nov/kernel"
+
+DEFAULT_KERNEL_BUILD_DIR="/lib/modules/`uname -r`/build"
+
+DO_CLEAN=0
+DO_LINUX=0
+DO_INTEL_INTERNAL=1
+
+usage()
+{
+	echo "Usage: sh ./build_driver <options>";
+	echo "Where options are:";
+	echo "-k, --kernel-build-dir [dir-name]: specify the kernel build directory (defaults to $DEFAULT_KERNEL_BUILD_DIR if not specified)."
+	echo "-h, --help: print this usage message";
+        echo "-c, --clean: run a make clean";
+        echo "-l, --linux: compile the driver for a device running (32-bit) Linux. Note: 64-bit systems are NOT supported, for now!";
+        echo "-d, --debug: do a debug build, with \"-Werror\" turned ON";
+        echo "-s, --symvers [path to Module.symvers file]: specify a \"Module.symvers\" file to extract symbols from; MUST be FULL PATH!";
+	return 0;
+}
+
+while [ $# -gt 0 ] ; do
+  case "$1" in
+	-h | --help)
+		usage; exit 0;;
+	-k | --kernel-build-dir)
+		KERNEL_BUILD_DIR=$2; shift;;
+        -c | --clean)
+                DO_CLEAN=1;;
+        -l | --linux)
+                DO_LINUX=1;;
+        -i | --internal)
+                DO_INTEL_INTERNAL=1;;
+        -d | --debug)
+                DO_DEBUG_BUILD=1;;
+        -s | --symvers)
+                MODULE_SYMVERS_FILE=$2; shift;;
+	*) usage; exit 255;;
+	esac
+	shift
+done
+
+if [ "X$KERNEL_BUILD_DIR" = "X" ]; then
+	KERNEL_BUILD_DIR=$DEFAULT_KERNEL_BUILD_DIR;
+fi
+
+echo "Using kernel build dir = $KERNEL_BUILD_DIR"
+
+if [ "X$MODULE_SYMVERS_FILE" = "X" ] ; then
+    echo "No module symvers file found";
+else
+    echo "Using symvers file = $MODULE_SYMVERS_FILE"
+fi
+
+APWR_RED_HAT="0"
+
+# check which distro
+# taken from the 'boot-script'
+if [ -e "/etc/issue" ]; then
+    is_redhat=`cat /etc/issue | grep -i "red hat"`;
+    if [ "$is_redhat" != "" ]; then
+		APWR_RED_HAT=1
+		echo "Using RedHat-specific hack for kernel version number..."
+    fi
+fi
+
+WAKELOCK_SAMPLE="0"
+wakelock_file=${KERNEL_BUILD_DIR}/source/include/trace/events/wakelock.h
+if [ -f $wakelock_file ] ; then
+  echo "\"$wakelock_file\" exists!"
+  WAKELOCK_SAMPLE=1
+else
+  echo "\"$wakelock_file\" does NOT exist!"
+  pm_wakeup_file=${KERNEL_BUILD_DIR}/source/include/linux/pm_wakeup.h
+  if [ -f $pm_wakeup_file ] ; then
+    echo "\"$pm_wakeup_file\" exists!"
+    WAKELOCK_SAMPLE=1
+  else
+    echo "\"$pm_wakeup_file\" does NOT exist!"
+  fi
+fi
+
+DO_ANDROID="1"
+if [ $DO_LINUX -eq 1 ]; then
+    DO_ANDROID="0"
+fi
+
+PW_DO_DEBUG_BUILD="0"
+if [ $DO_DEBUG_BUILD -eq 1 ]; then
+    PW_DO_DEBUG_BUILD="1"
+fi
+
+make_args="KERNEL_SRC_DIR=$KERNEL_BUILD_DIR APWR_RED_HAT=$APWR_RED_HAT WAKELOCK_SAMPLE=$WAKELOCK_SAMPLE DO_ANDROID=$DO_ANDROID DO_INTEL_INTERNAL=$DO_INTEL_INTERNAL DO_DEBUG_BUILD=$PW_DO_DEBUG_BUILD MODULE_SYMVERS_FILE=$MODULE_SYMVERS_FILE $make_args"
+echo "Make args = $make_args"
+if [ $DO_CLEAN -eq 1 ]; then
+    ${MAKE} -f ${MAKEFILE_NAME} $make_args clean
+else
+    ${MAKE} -f ${MAKEFILE_NAME} $make_args clean default
+fi
+

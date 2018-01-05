@@ -1,0 +1,27 @@
+#include <dt-bindings/pmic/pmic.h>
+
+xz321x:xz321x {
+	status = "disabled";
+	compatible = "rockchip,xz321x";
+	regulators {
+		xz3215_buck_reg: regulator@0 {
+			regulator-name = "xz3215_buck";
+			regulator-domain = <PMIC_DOMAIN_XZ3215_BUCK>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_ON>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+			regulator-slp-mode = <PMIC_MODE_ON>;
+			regulator-slp-voltage = <PMIC_VOLTAGE_0V85>;
+		};
+
+		xz3216_buck_reg: regulator@1 {
+			regulator-name = "xz3216_buck";
+			regulator-domain = <PMIC_DOMAIN_XZ3216_BUCK>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_ON>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+			regulator-slp-mode = <PMIC_MODE_ON>;
+			regulator-slp-voltage = <PMIC_VOLTAGE_0V85>;
+		};
+	};
+};

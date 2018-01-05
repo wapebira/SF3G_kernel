@@ -1,0 +1,28 @@
+#include <dt-bindings/pmic/pmic.h>
+
+syr82x:syr82x {
+	status = "disabled";
+	compatible = "rockchip,syr82x";
+	regulators {
+		syr827_buck_reg: regulator@0 {
+			regulator-name = "syr827_buck";
+			regulator-domain = <PMIC_DOMAIN_SYR827_VSEL0>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_ON>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+			regulator-slp-mode = <PMIC_MODE_ON>;
+			regulator-slp-voltage = <PMIC_VOLTAGE_0V85>;
+		};
+
+
+		syr828_buck_reg: regulator@2 {
+			regulator-name = "syr828_buck";
+			regulator-domain = <PMIC_DOMAIN_SYR828_VSEL0>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_ON>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+			regulator-slp-mode = <PMIC_MODE_ON>;
+			regulator-slp-voltage = <PMIC_VOLTAGE_0V85>;
+		};
+	};
+};

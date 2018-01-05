@@ -1,0 +1,7 @@
+
+config COMPAT_IWLWIFI
+	tristate "compat iwlwifi driver"
+	depends on m
+	depends on !CFG80211
+
+

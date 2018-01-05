@@ -1,0 +1,35 @@
+#
+# light and position sensor drivers configuration
+#
+
+menuconfig PROXIMITY_DEVICE
+	bool "proximity sensor device support"
+	default y	
+
+if PROXIMITY_DEVICE
+
+config PS_AL3006
+  bool "psensor al3006"
+	default n
+
+config PS_STK3171
+  bool "psensor stk3171"
+	default n
+
+config PS_AP321XX
+  bool "psensor ap321xx"
+	default n
+
+config PS_TMD2772
+  bool "psensor tmd2772"
+	default y
+
+config PS_CM36682
+  bool "psensor cm36682"
+	default y
+
+config PS_RPR0521
+  bool "psensor rpr0521"
+	default y
+endif
+

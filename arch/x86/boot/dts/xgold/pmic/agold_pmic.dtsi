@@ -1,0 +1,143 @@
+#include <dt-bindings/pmic/pmic.h>
+
+agold_pmic:agold_pmic {
+	status = "okay";
+	compatible = "intel,agold_pmic";
+	regulators {
+		agold_lsim1_reg: regulator@0 {
+			regulator-name = "ag_lsim1";
+			regulator-domain = <PMIC_DOMAIN_LSIM1>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_2V91>;
+		};
+
+		agold_lsim2_reg: regulator@1 {
+			regulator-name = "ag_lsim2";
+			regulator-domain = <PMIC_DOMAIN_LSIM2>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_2V91>;
+		};
+
+		agold_laux1_reg: regulator@2 {
+			regulator-name = "ag_laux1";
+			regulator-domain = <PMIC_DOMAIN_LAUX1>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V80>;
+		};
+
+		agold_laux2_reg: regulator@3 {
+			regulator-name = "ag_laux2";
+			regulator-domain = <PMIC_DOMAIN_LAUX2>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_2V80>;
+		};
+
+		agold_lmmc1_reg: regulator@4 {
+			regulator-name = "ag_lmmc1";
+			regulator-domain = <PMIC_DOMAIN_LMMC1>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_2V85>;
+		};
+
+		agold_lusb_reg: regulator@5 {
+			regulator-name = "ag_lusb";
+			regulator-domain = <PMIC_DOMAIN_LUSB>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_3V15>;
+		};
+
+		agold_lpmu_reg: regulator@6 {
+			regulator-name = "ag_lpmu";
+			regulator-domain = <PMIC_DOMAIN_LPMU>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_FIXED>;
+			regulator-init-voltage = <PMIC_VOLTAGE_FIXED>;
+		};
+
+		agold_laif_reg: regulator@7 {
+			regulator-name = "ag_laif";
+			regulator-domain = <PMIC_DOMAIN_LAIF>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_IDLE_STDBY>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V10>;
+		};
+
+		agold_lcabb_reg: regulator@8 {
+			regulator-name = "ag_lcabb";
+			regulator-domain = <PMIC_DOMAIN_LCABB>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_STANDBYLOWVOLTAGE>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+		};
+
+		agold_lmem_reg: regulator@9 {
+			regulator-name = "ag_lmem";
+			regulator-domain = <PMIC_DOMAIN_LMEM>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_IDLE_STDBY>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V226>;
+		};
+
+		agold_lmipi_reg: regulator@10 {
+			regulator-name = "ag_lmipi";
+			regulator-domain = <PMIC_DOMAIN_LMIPI>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V17>;
+		};
+
+		agold_lpll_reg: regulator@11 {
+			regulator-name = "ag_lpll";
+			regulator-domain = <PMIC_DOMAIN_LPLL>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_EN>;
+			regulator-init-mode = <PMIC_MODE_OFF_STDBY>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V20>;
+		};
+
+		agold_sd1_reg: regulator@12 {
+			regulator-name = "ag_sd1";
+			regulator-domain = <PMIC_DOMAIN_SD1>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_FIXED>;
+			regulator-init-voltage = <PMIC_VOLTAGE_FIXED>;
+		};
+
+		agold_sd2_reg: regulator@13 {
+			regulator-name = "ag_sd2";
+			regulator-domain = <PMIC_DOMAIN_SD2>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_FIXED>;
+			regulator-init-voltage = <PMIC_VOLTAGE_FIXED>;
+		};
+
+		agold_vmmc_reg: regulator@14 {
+			regulator-name = "ag_vmmc";
+			regulator-domain = <PMIC_DOMAIN_ELDO_VMMC>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_1V80>;
+		};
+
+		agold_tcxo_ldo_reg: regulator@15 {
+			regulator-name = "ag_tcxo_ldo";
+			regulator-domain = <PMIC_DOMAIN_GNSS_TCXO_LDO>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_OFF>;
+			regulator-init-voltage = <PMIC_VOLTAGE_FIXED>;
+		};
+
+		agold_dummy_reg: regulator@16 {
+			regulator-name = "dummy";
+			regulator-domain = <PMIC_DOMAIN_DUMMY>;
+			regulator-init-pulldown = <PMIC_PULLDOWN_FIXED>;
+			regulator-init-mode = <PMIC_MODE_FIXED>;
+			regulator-init-voltage = <PMIC_VOLTAGE_FIXED>;
+		};
+	};
+};

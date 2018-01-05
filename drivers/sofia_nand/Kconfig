@@ -1,0 +1,9 @@
+#
+# NAND configuration.
+#
+
+config BLOCK_SOFIA3GR_NAND
+	tristate "SOFIA3GR NAND Device Support"
+	help
+	  SOFIA3GR NAND Device Support
+

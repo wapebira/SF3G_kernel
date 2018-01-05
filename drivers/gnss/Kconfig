@@ -1,0 +1,10 @@
+#
+# drivers (GPS)
+#
+menu "GNSS device drivers"
+config GNSS_AG620
+	tristate "AG620 driver"
+	help
+	  AG620.
+
+endmenu

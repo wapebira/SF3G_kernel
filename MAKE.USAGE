@@ -1,0 +1,3 @@
+copy boot.fls to kernel root
+make SF_3GR-svb.fls 
+now boot.fls is ready

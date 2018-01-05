@@ -1,0 +1,24 @@
+#
+# Copyright (C) 2012-2013 Intel Mobile Communications GmbH
+#
+# This software is licensed under the terms of the GNU General Public
+# License version 2, as published by the Free Software Foundation, and
+# may be copied, distributed, and modified under those terms.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+
+#
+# IDI client support
+#
+
+config IDI_AG6X0
+       tristate "IDI AGold 6x0 support"
+       help
+	This option enables the support for the AGold 6x0 devices.
+	This can be AG610 with 2G/3G RF, BT, PMU and FMR devices,
+	or AG620 with 2G/3G RF, BT, PMU, WIFI, GNSS and FMR devices.
+	This will register a IDI client device within the IDI subsystem.

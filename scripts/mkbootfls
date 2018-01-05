@@ -1,0 +1,97 @@
+#!/bin/sh
+# Licensed under the terms of the GNU GPL License version 2
+set -e
+
+dd --help | grep -q seek_bytes && DD=dd || DD=$0-dd
+
+usage() {
+	echo "usage: $0 [ --fls boot.fls ] [ --kernel vmlinux.bin ] [ --dtb dtb ]"
+	exit 0
+}
+
+[ -f boot.fls ] && FLS=boot.fls
+[ -f arch/x86/boot/vmlinux.bin ] && KERNEL=arch/x86/boot/vmlinux.bin
+
+while [ $# -gt 0 ]; do
+	case $1 in
+		--fls)
+			FLS=$2
+			shift 2
+			;;
+		--kernel)
+			KERNEL=$2
+			shift 2
+			;;
+		--dtb)
+			DTB=$2
+			shift 2
+			;;
+		-h)
+			usage
+			;;
+		--help)
+			usage
+			;;
+		*)
+			usage
+			;;
+	esac
+done
+
+if [ ! -f "$FLS" ]; then
+	echo "$FLS" does not exist
+	exit 1
+fi
+if [ -n "$KERNEL" ]; then
+	if [ ! -f "$KERNEL" ]; then
+		echo "$KERNEL" does not exist
+		exit 1
+	fi
+fi
+if [ -n "$DTB" ]; then
+	if [ ! -f "$DTB" ]; then
+		echo "$DTB" does not exist
+		exit 1
+	fi
+fi
+
+P=`grep -abo "ANDROID!" "$FLS"`
+P=${P%%:*}
+BOOT_IMG_OFFSET=$P
+PAGE_SIZE=4096
+
+FLS_KERNEL_OFFSET=$(($BOOT_IMG_OFFSET + $PAGE_SIZE))
+P=$(($BOOT_IMG_OFFSET + 8))
+FLS_KERNEL_SIZE=`od --skip-bytes=$P --read-bytes=4 -i "$FLS" | head -n 1 | awk '{print $2}'`
+FLS_KERNEL_PAGES=$((($FLS_KERNEL_SIZE + $PAGE_SIZE - 1) / $PAGE_SIZE))
+FLS_KERNEL_SIZE=$(($FLS_KERNEL_PAGES * $PAGE_SIZE))
+
+P=$(($BOOT_IMG_OFFSET + 16))
+FLS_RAMDISK_SIZE=`od --skip-bytes=$P --read-bytes=4 -i "$FLS" | head -n 1 | awk '{print $2}'`
+FLS_RAMDISK_PAGES=$((($FLS_RAMDISK_SIZE + $PAGE_SIZE - 1) / $PAGE_SIZE))
+FLS_RAMDISK_SIZE=$(($FLS_RAMDISK_PAGES * $PAGE_SIZE))
+
+P=$(($BOOT_IMG_OFFSET + 24))
+FLS_DTB_SIZE=`od --skip-bytes=$P --read-bytes=4 -i "$FLS" | head -n 1 | awk '{print $2}'`
+FLS_DTB_PAGES=$((($FLS_DTB_SIZE + $PAGE_SIZE - 1) / $PAGE_SIZE))
+FLS_DTB_SIZE=$(($FLS_DTB_PAGES * $PAGE_SIZE))
+FLS_DTB_OFFSET=$(($FLS_KERNEL_OFFSET + $FLS_KERNEL_SIZE + $FLS_RAMDISK_SIZE))
+
+if [ -f "$KERNEL" ]; then
+	KERNEL_SIZE=`wc -c < "$KERNEL"`
+	if [ $FLS_KERNEL_SIZE -lt $KERNEL_SIZE ]; then
+		echo "$FLS" too small, only allow "$KERNEL" no more than $FLS_KERNEL_SIZE
+		exit 1
+	fi
+	$DD if="$KERNEL" of="$FLS" seek=$FLS_KERNEL_OFFSET bs=$KERNEL_SIZE count=1 conv=nocreat,notrunc oflag=seek_bytes >/dev/null 2>&1
+fi
+
+if [ -f "$DTB" ]; then
+	DTB_SIZE=`wc -c < "$DTB"`
+	if [ $FLS_DTB_SIZE -lt $DTB_SIZE ]; then
+		echo "$FLS" too small, only allow "$DTB" no more than $FLS_DTB_SIZE
+		exit 1
+	fi
+	$DD if="$DTB" of="$FLS" seek=$FLS_DTB_OFFSET bs=$DTB_SIZE count=1 conv=nocreat,notrunc oflag=seek_bytes >/dev/null 2>&1
+fi
+exit 0

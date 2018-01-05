@@ -1,0 +1,11 @@
+* SoFIA-3GR AG620 Thermal Management Unit (TMU)
+
+** Required properties:
+
+- compatible : should be "intel,ag620_thermal".
+
+Example:
+
+ag620_thermal {
+	compatible = "intel,ag620_thermal";
+};

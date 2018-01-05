@@ -1,0 +1,7 @@
+config TOUCHSCREEN_GT615
+	tristate "goodix gt615 touchscreen"
+	depends on I2C
+	default n
+	help
+	  Say Y here if you have a goodix gt615 touchscreen.
+

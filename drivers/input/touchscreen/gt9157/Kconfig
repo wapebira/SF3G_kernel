@@ -1,0 +1,6 @@
+config TOUCHSCREEN_GT9157
+        tristate "goodix gt9157 touchscreen"
+        depends on I2C
+        default n
+        help
+          Say Y here if you have a goodix gt9157 touchscreen.

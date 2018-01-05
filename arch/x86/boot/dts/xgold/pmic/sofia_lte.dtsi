@@ -1,0 +1,385 @@
+/* SOFIA LTE PMIC */
+
+/* See page 276-277 of SoFIA_LTE_PMIC_V1.0_PMUHW_PS_HWA\[1\].pdf
+
+/* I2C SoC devices */
+#define PMIC_SLAVE_DEVICE_1	0x4E
+#define PMIC_SLAVE_DEVICE_2	0x4F
+#define PMIC_SLAVE_DEVICE_3	0x5E
+#define PMIC_SLAVE_DEVICE_4	0x5F
+#define PMIC_SLAVE_DEVICE_5	0x6D
+#define PMIC_SLAVE_DEVICE_6	0x6E
+
+/* SVID SoC devices */
+#define PMIC_VCC_SVID_DEVICE	0x10
+#define PMIC_VNN_SVID_DEVICE	0x12
+#define PMIC_VSYS_SVID_DEVICE	0x16
+#define PMIC_VPA_SVID_DEVICE	0x18
+
+/* Non SoC devices */
+#define PMIC_VCC_DCDC_DEVICE	0x11
+#define PMIC_VNN_DCDC_DEVICE	0x13
+#define PMIC_VCC_PHS_DEVICE	0x15
+#define PMIC_VNN_PHS_DEVICE	0x17
+#define PMIC_VPA_DCDC_DEVICE	0x19
+#define PMIC_VDD1_DCDC_DEVICE	0x1B
+#define PMIC_VDD2_DCDC_DEVICE	0x1C
+#define PMIC_VPA_PHS_DEVICE	0x1D
+#define PMIC_VDD1_PHS_DEVICE	0x1E
+#define PMIC_VDD2_PHS_DEVICE	0x1F
+
+
+pmic {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	ranges;
+	compatible = "intel,pmic", "intel,soc";
+	intel,platform-dev = "pmicper";
+
+	xgold_vmm_pmic:xgold_vmm_pmic {
+		compatible = "intel,xgold_vmm_pmic", "intel,pmicper";
+		#address-cells = < 0 >;
+		interrupts = < 1 >;
+		interrupt-parent = <&xgold_vmm_pmic>;
+		#interrupt-cells = < 1 >;
+		interrupt-map = <
+			1 &hirq HIRQ_PMIC_TEST IRQ_TYPE_DEFAULT
+		>;
+		interrupt-names = "PMIC_ACCESS_HIRQ";
+	};
+
+	vmm_pmic-ext {
+
+	#include "vmm_pmic-ext_regs.h"
+
+	vmm_pmic-ext,disallowed_regs = <
+
+			/*DEV1 Registers */
+			PBIRQ_REG
+			THRMIRQ0_REG
+			THRMIRQ1_REG
+			THRMIRQ2_REG
+			BCUIRQ_REG
+			ADCIRQ_REG
+			CHGRIRQ0_REG
+			CHGRIRQ1_REG
+			GPIOIRQ0_REG
+			GPIOIRQ1_REG
+			CRITIRQ_REG
+
+			RESETSRC0_REG
+			RESETSRC1_REG
+
+			WAKESRC_REG
+
+			MODEMCTRL_REG
+			SOCCTRL_REG
+
+			GPIO0CTLO_REG
+			GPIO1CTLO_REG
+			GPIO2CTLO_REG
+			GPIO3CTLO_REG
+			GPIO4CTLO_REG
+			GPIO5CTLO_REG
+			GPIO6CTLO_REG
+			GPIO7CTLO_REG
+			GPIO8CTLO_REG
+
+			S_BCUCTRL_REG
+
+			/*DEV2 Registers */
+			VRTCCTRL_REG
+			TMUIRQ_REG
+
+			/*DEV3 Registers */
+			USBIDDETTYPE_REG
+			USBPHYCTRL_REG
+
+			CHGRCTRL0_REG
+			CHGRSTATUS_REG
+
+			VBUSDETCTRL_REG
+			VDCINDETCTRL_REG
+
+			CHRTTADDR_REG
+
+			CHGDISCTRL_REG
+
+			TLP1CTRL_REG
+			TLP1EVSTATUS0_REG
+			TLP1EVSTATUS1_REG
+			TLP1EVSTATUS2_REG
+			TLP1EVSTATUS3_REG
+
+			TLP1INSTMEMADDRH_REG
+			TLP1INSTMEMADDRL_REG
+
+			TLP2CTRL_REG
+			TLP2EVSTATUS_REG
+
+			TLP2INSTMEMADDR_REG
+
+			/*DEV4 Registers */
+			VENDCTL0_REG
+			VENDCTL1_REG
+			VENDCTL2_REG
+
+			NVM_MB_ADDRH_REG
+			NVM_MB_ADDRL_REG
+
+			CODSRC_REG
+			ISOCTRL_REG
+
+			NVMVIRQ_REG
+			ADCTLP2VIRQ_REG
+
+			I2CSIFVIRQ_REG
+			REGBUSVIRQ_REG
+			CHGRVIRQ_REG
+			TLP1VIRQ_REG
+			DCDCVIRQ0_REG
+
+			VROCIRQ0_REG
+
+			VROCIRQ2_REG
+
+			GPADC_TEST0_REG
+
+			GPADC_PKTST_REG
+
+			COMPTEST1_REG
+
+			PMICSPARE05_REG
+			PMICSPARE06_REG
+			PMICSPARE07_REG
+			PMICSPARE08_REG
+			PMICSPARE09_REG
+			PMICSPARE10_REG
+			PMICSPARE11_REG
+			PMICSPARE12_REG
+			I2C_HS_TIMING_REG
+
+			AFE_SPARE1_REG
+			AFE_SPARE2_REG
+			AFE_SPARE3_REG
+
+			/*DEV5 Registers */
+
+			AFE_AUDOUTCTRL1A_REG
+			AFE_AUDOUTCTRL1B_REG
+			AFE_AUDOUTCTRL1C_REG
+			AFE_AUDOUTCTRL1D_REG
+
+			AFE_AUDOUTCTRL3A_REG
+			AFE_AUDOUTCTRL3B_REG
+			AFE_AUDOUTCTRL3C_REG
+			AFE_AUDOUTCTRL3D_REG
+
+			AFE_AUDIOINCTRL3_REG
+
+			AFE_GAIN_IN3_REG
+			AFE_GAIN_IN4_REG
+
+			AFE_DIGMICCTRL_REG
+
+			I2S_CTRL_LOW_REG >;
+	};
+
+
+	dev@1 {
+		compatible = "intel,pmicper";
+		/* VREG */
+		/* PBTN-UBTN */
+		on_button:on_button {
+			compatible = "intel,pmic,on-button";
+			intel,utility-button;
+			#address-cells = <0>;
+			interrupts = <0 1>;
+			interrupt-parent = <&on_button>;
+			#interrupt-cells = <1>;
+			interrupt-map = <
+				0 &hirq HIRQ_PMIC_PWR_BUTTON IRQ_TYPE_DEFAULT
+				1 &hirq HIRQ_PMIC_UI_BUTTON IRQ_TYPE_DEFAULT >;
+			interrupt-names = "on_button0", "on_button1";
+			linux,keymap = <0x00000074>; /* KEY_POWER */
+		};
+
+		pmic_bat:pmic_bat {
+			/* battery */
+			compatible = "intel,pmic_bat";
+			#address-cells = < 0 >;
+			interrupts = < 0 >;
+			interrupt-parent = <&pmic_bat>;
+			#interrupt-cells = < 1 >;
+			interrupt-map = <
+				0 &hirq HIRQ_PMIC_BATTDET IRQ_TYPE_DEFAULT
+			>;
+			interrupt-names = "PMIC_CHARGER_HIRQ";
+		};
+	};
+
+	dev@2 {
+		compatible = "intel,pmicper";
+
+		/* ADC */
+		adc:adc {
+			compatible = "intel,adc";
+		};
+
+		meas_pmic:meas_pmic {
+			compatible = "intel,meas_pmic";
+			#io-channel-cells = <1>;
+			io-channel-ranges;
+			#address-cells = < 0 >;
+			interrupts = < 0 1 2 3 4 5 >;
+			interrupt-parent = <&meas_pmic>;
+			#interrupt-cells = < 1 >;
+			#size-cells = <1>;
+			interrupt-map = < 0 &hirq HIRQ_PMIC_ADC_USBID IRQ_TYPE_DEFAULT
+					  1 &hirq HIRQ_PMIC_ADC_BATTEMP IRQ_TYPE_DEFAULT
+					  2 &hirq HIRQ_PMIC_ADC_SYSTEMP IRQ_TYPE_DEFAULT
+					  3 &hirq HIRQ_PMIC_ADC_BATTID IRQ_TYPE_DEFAULT
+					  4 &hirq HIRQ_PMIC_ADC_VBATT IRQ_TYPE_DEFAULT
+					  5 &hirq HIRQ_PMIC_ADC_GPMEAS IRQ_TYPE_DEFAULT >;
+			interrupt-names = "ADC_USBID_IRQ",   "ADC_BATTEMP_IRQ",
+					  "ADC_SYSTEMP_IRQ", "ADC_BATTID_IRQ",
+					  "ADC_VBATT_IRQ",   "ADC_GPMEAS_IRQ";
+		};
+
+		adc_sensors:adc_sensors {
+			compatible = "intel,adc_sensors";
+			intel,platform_name = "pmic";
+			io-channel-names = "VBAT_ADC",     "VBAT_MIN_ADC",
+						"VBAT_OCV_ADC", "BATTEMP0_ADC",
+						"BATID_ADC",    "PMICTEMP_ADC",
+						"ANAMON_ADC",   "SYSTEMP0_ADC",
+						"SYSTEMP1_ADC", "SYSTEMP2_ADC",
+						"USBID_ADC";
+			io-channels = < &meas_pmic 0 &meas_pmic 1
+					&meas_pmic 2 &meas_pmic 3
+					&meas_pmic 4 &meas_pmic 5
+					&meas_pmic 6 &meas_pmic 7
+					&meas_pmic 8 &meas_pmic 9
+					&meas_pmic 10>;
+		};
+
+		/* SW Fuel gauge*/
+		fuel_gauge_hal:fuel_gauge_hal {
+			compatible = "intel,pmic_swfg_hal";
+			#address-cells = < 0 >;
+			interrupts = < 0 >;
+			interrupt-parent = <&fuel_gauge_hal>;
+			#interrupt-cells = < 1 >;
+			interrupt-map = <
+				0 &hirq HIRQ_PMIC_ADC_CCTICK IRQ_TYPE_DEFAULT
+			>;
+			interrupt-names = "PMIC_CC_HIRQ";
+
+			offset_error_uc_per_s = < 0 >;
+		};
+
+		/* Therm */
+	};
+
+	dev@3 {
+		compatible = "intel,pmicper";
+		/* USB */
+		/* Charger */
+		pmic_i2c:pmic_i2c {
+			compatible = "intel,pmic_i2c";
+			intel,reg = < 0x5e >;
+			intel,irq-reg = < 0x4e >;
+			#size-cells = <1>;
+			#address-cells = <0>;
+
+			interrupt-parent = <&hirq>;
+			interrupts = < HIRQ_PMIC_I2CWRCMP IRQ_TYPE_DEFAULT
+				HIRQ_PMIC_I2CRDCMP IRQ_TYPE_DEFAULT
+				HIRQ_PMIC_I2CERROR IRQ_TYPE_DEFAULT>;
+
+			interrupt-names = "rd", "wr", "err";
+		};
+
+		pmic_usb_det:pmic_usb_det {
+			compatible = "intel,pmic_usb_det";
+			interrupt-parent = <&hirq>;
+			interrupts = < HIRQ_PMIC_VBUSDET IRQ_TYPE_DEFAULT
+				HIRQ_PMIC_CTYP IRQ_TYPE_DEFAULT
+				HIRQ_PMIC_USBID_FLT IRQ_TYPE_DEFAULT
+				HIRQ_PMIC_USBID_GND IRQ_TYPE_DEFAULT>;
+			interrupt-names = "vbusdet", "ctype", "usbidflt", "usbidgnd";
+
+		};
+	};
+
+	dev@4 {
+		compatible = "intel,pmicper";
+		/* NVM */
+	};
+
+	dev@5 {
+		compatible = "intel,pmicper";
+		/* LDO */
+		/* I2S */
+		/* AFE */
+		pmic_afe:pmic_afe {
+			compatible = "intel,pmic_afe";
+			pm,class-name = "generic_class";
+			pm,user-name = "afe_volt";
+			pm,state-D0 = "enable";
+			pm,state-D3 = "disable";
+			intel,codec_dai_name = "pmic_afe_i2s";
+#ifdef PMIC_B0
+			intel,pmic-B0;
+#endif
+		};
+	};
+
+	dev@6 {
+		compatible = "intel,pmicper";
+		/* LED */
+		pmic_led:pmic-backlight {
+			compatible = "intel,pmic-led";
+			pm,class-name = "bl_class";
+			intel,led-k2 = <0x12a>;
+			intel,led-k1max = <0x00e0>;
+			intel,led-ctrl-up = <0x83>;
+			intel,led-ctrl-down = <0x80>;
+			intel,led-up = <0x0A>;
+			intel,led-down = <0x04>;
+		};
+
+#ifdef PMIC_B0
+		/* Accessory Detection */
+		headset:headset {
+			compatible = "intel,headset,pmic";
+			#address-cells = < 0 >;
+			intel,reg = < 0x6e >;
+			intel,irq-reg = < 0x4e >;
+
+			interrupts = < 0 1 >;
+			interrupt-parent = <&headset>;
+			#interrupt-cells = <1>;
+			interrupt-map = <
+				0 &hirq HIRQ_PMIC_ACC_DET1 IRQ_TYPE_DEFAULT
+				1 &hirq HIRQ_PMIC_ACC_DET2 IRQ_TYPE_DEFAULT
+			>;
+			interrupt-names = "acd1", "acd2";
+			/*io-channel-names = "ACCID_ADC";
+			io-channels = < &meas_pmic ? >;*/
+		};
+#endif
+
+		/* Vibrator */
+		/* Key led */
+		pmic_key_led:pmic-key-backlight {
+			compatible = "intel,pmic-key-led";
+			pm,class-name = "bl_class";
+			intel,led-ctrl-up = <0x01>;
+			intel,led-ctrl-down = <0x00>;
+			intel,led-cfg-down = <0x00>;
+			intel,led-cfg-time-step = <0x00>;
+			intel,led-core-suspendresume;
+		};
+	};
+};

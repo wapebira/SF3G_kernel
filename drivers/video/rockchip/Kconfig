@@ -1,0 +1,25 @@
+menuconfig FB_ROCKCHIP
+	tristate "Rockchip Framebuffer Display support"
+	depends on FB
+	select FB_CFB_FILLRECT
+	select FB_CFB_COPYAREA
+	select FB_CFB_IMAGEBLIT
+	select FB_MODE_HELPERS
+	select VIDEOMODE_HELPERS
+	default n
+	help
+	  Enable Rockchip Framebuffer Display driver
+	  for sofia 3gr platform.
+	  Please choose Y to enable rockchip
+	  framebuffer driver.
+
+source "drivers/video/rockchip/vop/Kconfig"
+source "drivers/video/rockchip/rga/Kconfig"
+source "drivers/video/rockchip/hdmi/Kconfig"
+
+config LVDS_RK61X
+        tristate "RK61X(JettaB) lvds,lcd,scaler video interface support"
+	depends on MFD_RK61X && FB_ROCKCHIP
+	default n
+	help
+	  RK61X(Jetta B) LVDS,LCD,scaler transmitter support.

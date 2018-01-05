@@ -1,0 +1,20 @@
+VMM prh
+
+Required properties:
+- compatible: "intel,prh_vmm"
+- prh_display: here is display prh which set the voltage for the virtual domain.
+- mipi_ana: set PMIC_VDD_PRIM_DISPLAY voltage.
+- mipi_dsi: set PMIC_VDD_MIPI_DSI voltage.
+- lvds_io: set PMIC_VDD_LVDS_1V8 voltage.
+- mipi_io: set PMIC_VDD_LCD_DSI voltage.
+
+Example:
+prh_vmm:prh_vmm {
+       compatible = "intel,prh_vmm";
+       prh_display {
+               mipi_ana = <PMIC_VDD_PRIM_DISPLAY  PMIC_VOLTAGE_3V00>;
+               mipi_dsi = <PMIC_VDD_MIPI_DSI  PMIC_VOLTAGE_1V17>;
+               lvds_io = <PMIC_VDD_LVDS_1V8  PMIC_VOLTAGE_1V80>;
+               mipi_io = <PMIC_VDD_LCD_DSI  PMIC_VOLTAGE_1V80>;
+       };
+};

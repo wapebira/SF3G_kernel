@@ -1,0 +1,138 @@
+config VIDEO_OV8825
+	bool "OV8825"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV8825.
+
+config VIDEO_OV5670
+	bool "OV5670"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV5670.
+
+config VIDEO_OV9740
+	bool "OV9740"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV9740.
+
+config VIDEO_OV9760
+	bool "OV9760"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV9760.
+
+config VIDEO_OV13850
+	bool "OV13850"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV13850.
+
+config VIDEO_OV5648
+	bool "OV5648"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	help
+	  Say Y here to enable OV5648.
+	  OV5648 is a 5MP Camera Sensor.
+	  The supported max resolution is 2592X1944.
+	  It is a RAW Camera Sensor.
+
+config VIDEO_GC2155
+	tristate "GC2155"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable GC2155.
+	  GC2155 is a 2MP Camera Sensor.
+	  The supported max resolution is 1600x1200.
+	  It is a SOC Camera Sensor.
+
+config VIDEO_GC2355
+	tristate "GC2355"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable GC2355.
+	  GC2355 is a 2MP Camera Sensor.
+	  The supported max resolution is 1616x1232.
+	  It is a RAW Camera Sensor.
+
+config VIDEO_GC0310
+	tristate "GC0310"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable GC0310.
+	  GC0310 is a VGA Camera Sensor.
+	  The supported max resolution is 640x480.
+	  It is a SOC Camera Sensor.
+
+config VIDEO_GC0310_RAW
+	tristate "GC0310_RAW"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable GC0310.
+	  GC0310 is a VGA Camera Sensor.
+	  The supported max resolution is 640x480.
+	  It is a RAW Camera Sensor.
+
+config VIDEO_OV8858
+	bool "OV8858"
+	depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV8858.
+
+config VIDEO_OV2685
+    bool "OV2685"
+    depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+	default n
+	---help---
+	Say Y here to enable OV2685.
+
+config VIDEO_OV2680
+    bool "OV2680"
+    depends on VIDEO_V4L2 && VIDEO_XGOLD && I2C
+        default n
+        ---help---
+        Say Y here to enable OV2680.
+        OV2680 is a 2M Camera Sensor.
+	  The supported max resolution is 1600x1200.
+	  It is a RAW Camera Sensor.
+
+config VIDEO_SP0A20
+	tristate "SP0A20"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable SP0A20.
+	  SP0A20 is a 0.3MP Camera Sensor.
+	  The supported max resolution is 640x480.
+	  It is a SOC Camera Sensor.
+
+config VIDEO_SP2508
+	tristate "SP2508"
+	depends on I2C && VIDEO_V4L2
+	default n
+	help
+	  Say Y here to enable SP2508.
+	  SP2508 is a 2MP Camera Sensor.
+	  The supported max resolution is 1600x1200.
+	  It is a RAW Camera Sensor.
+
+config VIDEO_HM2051
+	tristate "HM2051 support"
+	depends on I2C && VIDEO_V4L2 && VIDEO_XGOLD
+	---help---
+	This is a Video4Linux2 sensor-level driver for HM2051.
+
+	iCatch is an external ISP connected to the sensor
+
+	It currently only works with the atomisp driver.

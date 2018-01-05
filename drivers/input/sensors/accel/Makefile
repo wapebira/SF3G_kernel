@@ -1,0 +1,12 @@
+obj-$(CONFIG_GS_KXTIK) 		+= kxtik.o
+obj-$(CONFIG_GS_KXTJ9) 		+= kxtj9.o
+obj-$(CONFIG_GS_MMA8452) 	+= mma8452.o
+obj-$(CONFIG_GS_LIS3DH) 	+= lis3dh.o
+obj-$(CONFIG_GS_MMA7660) 	+= mma7660.o
+obj-$(CONFIG_GS_MXC6225)    += mxc622x.o
+obj-$(CONFIG_GS_DMT10)      += dmard10.o
+obj-$(CONFIG_GS_LSM303D)    += lsm303d.o
+obj-$(CONFIG_MPU6880_ACC)   += mpu6880_acc.o
+obj-$(CONFIG_BMA2XX_ACC)    += bma2xx.o
+obj-$(CONFIG_LSM303C_ACC)   += lsm303c_acc.o
+obj-$(CONFIG_LSM6DS3_ACC)   += lsm6ds3_acc.o

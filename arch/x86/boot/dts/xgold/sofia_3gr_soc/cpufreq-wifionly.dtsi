@@ -1,0 +1,26 @@
+#ifndef CPUFREQ_CLOCK_LATENCY_US
+#define CPUFREQ_CLOCK_LATENCY_US 50000
+#endif
+cpufreq:cpufreq {
+		compatible = "intel,xgold-cpufreq";
+		clocks = <&clk_cpu>,<&MUX_CPU>,<&B_0_1>,<&G_0_1>;
+		intel,cpufreq-table-v1 = <416000 416000 728000 900000 1040000>;
+                intel,voltage-table-v1 = <975000 975000 1125000 1175000 1225000>;
+                intel,cpufreq-table-v2 = <416000 416000 728000 900000 1040000>;
+                intel,voltage-table-v2 = <975000 975000 1125000 1175000 1225000>;
+		clock-names = "core","mux","pll","bank";
+		intel,cpu_dvfs = < 1 >;
+		intel,clock_latency = <CPUFREQ_CLOCK_LATENCY_US>;
+		#address-cells = < 0 >;
+		interrupts = < 0 >;
+		interrupt-parent = <&cpufreq>;
+		#interrupt-cells = < 1 >;
+		interrupt-map = < 0 &hirq HIRQ_CPU_CLK_NOTIFY IRQ_TYPE_DEFAULT>;
+		interrupt-names = "CPU_CLK_CHANGE";
+	};
+ gpufreq:gpufreq {
+		compatible = "intel,xgold-gpufreq";
+		intel,gpufreq-table = <104000 312000 416000 600000>; //KHz
+		intel,voltage-table = <1000000 1050000 1150000 1250000>; //uV
+		intel,gpu_dvfs = < 1 >;
+};

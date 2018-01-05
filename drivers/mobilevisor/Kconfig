@@ -1,0 +1,109 @@
+#
+#  Copyright (C) 2014 Intel Mobile Communications
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License Version 2
+#  as published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#  You should have received a copy of the GNU General Public License Version 2
+#  along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+#
+# Mobilevisor vdriver configuration
+#
+
+if MOBILEVISOR_VDRIVER
+
+menu "Mobilevisor virtual driver support"
+
+config MOBILEVISOR_VDRIVER_PIPE
+        tristate "bi-directional pipe for inter OS communication"
+        default y
+        help
+          Virtual bi-directional pipe for inter OS communication.
+
+
+config MOBILEVISOR_VDRIVER_NVM
+        tristate "VNVM driver"
+        default y
+        help
+          VNVM driver
+
+config MOBILEVISOR_VDRIVER_POWER
+	bool "Virtual Power management frontend interface"
+	default y
+	help
+	  Power management support for the native device drivers
+	  in a virtualized environment.
+
+config MOBILEVISOR_VDRIVER_OEMCRYPTO
+	tristate "Virtual OEMCrypto frontend interface"
+	default y
+	help
+	  Virtualized OEMCrypto library support for Widevine DRM
+	  from Secure VM.
+	  To compile this driver as a module, choose M here: the
+	  module will be called voemcrypto-fe.
+
+config MOBILEVISOR_VDRIVER_DUMP
+	tristate "VDUMP Driver"
+	default y
+	help
+	  To support coredump
+	  via VMM when Linux panic
+	  To compile this driver as a module, choose M here: the
+	  module will be called vdump.
+
+config MOBILEVISOR_VDRIVER_USB
+	tristate "Virtual USB SIO Extender Front End"
+	default y
+	help
+	 usb sio extender front end allows sending AT
+	 commands to modem vm over usb acm.
+	 vbpipe is used to forward from acm to modem vm.
+
+	 To compile this driver as a module, choose M here: the
+	 module will be called vusb_se_fe
+
+config MOBILEVISOR_VDRIVER_ETHERNET
+        tristate "Virtual Ethernet driver"
+        depends on NETDEVICES
+        default y
+        help
+          This driver emulates Ethernet communication with a back-end driver
+          running in another partition.
+
+          To compile this driver as a module, choose M here: the
+          module will be called veth.
+
+config MOBILEVISOR_VDRIVER_MODEM_CTL
+        tristate "Virtual modem control driver"
+        default y
+        help
+          This driver provides interface to load, start and stop modem.
+
+config SYSTEM_PROFILING
+        tristate "Virtual System Profiling backend interface"
+        default n
+        help
+          Enable instrumentation for ExactProfiling in Linux
+          to generate traces for post-processing.
+
+config TEE_RPC
+        tristate "TEE RPC driver for Sofia sec_vm"
+	select VSEC_RPC
+	default n
+        help
+          TEE RPC driver for dispatching RPC calls to the secure vm
+
+          The driver's name is tee_rpc.
+
+          If unsure, select N.
+endmenu
+
+endif

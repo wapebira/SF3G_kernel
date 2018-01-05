@@ -1,0 +1,147 @@
+participant "kernel/stack" as K
+participant "iwlwifi" as IWL
+participant "mvm op-mode" as MVM
+participant "iwl-trans-idi" as IDI
+participant "idi bus driver" as BUS
+participant "Firmware" as FW
+
+K->IWL: module_init: iwl_drv_init
+IWL->IDI: iwl_idi_register_driver
+IDI->BUS: idi_register_peripheral_driver
+BUS-->IDI:
+IDI-->IWL:
+IWL-->K:
+
+K->MVM: TODO...
+note over MVM
+TODO
+MVM module init
+end note
+
+MVM-->K:
+
+BUS->IDI: iwl_idi_probe
+note over IDI
+iwl_idi_probe
+. iwl_trans_idi_alloc
+.   iwl_idi_request_io_byname
+.   iwl_idi_request_irqs
+.   iwl_idi_set_power_state(D3)
+end note
+note right of FW
+Guy: set_power_state
+shouldn't be here
+end note
+
+IDI->IWL: iwl_drv_start
+note over IWL
+iwl_drv_start
+. create debugfs
+end note
+IWL->K: iwl_request_firmware
+note over IWL
+iwl_drv_start (cont')
+. create sysfs
+end note
+IWL-->IDI:
+
+note right of FW
+Guy: should idi channel
+settings be here?
+end note
+
+note over IDI
+iwl_idi_probe (cont')
+. iwl_idi_rx_set_channel_config
+end note
+IDI->BUS: idi_set_channel_config
+BUS-->IDI:
+note over IDI
+iwl_idi_probe (cont')
+. iwl_idi_tx_set_channel_config
+end note
+IDI->BUS: idi_set_channel_config
+BUS-->IDI:
+note over IDI
+iwl_idi_probe (cont')
+. idi_al_init
+end note
+note right of FW
+Guy: idi_al_init
+shouldn't be here
+end note
+IDI-->BUS: (probe return)
+
+K->IWL: iwl_req_fw_callback
+note over IWL
+iwl_req_fw_callback
+. parse the fw image
+. allocate and populate buffers
+. decide if mvm or dvm fw
+. iwl_opmode_start
+TODO: continue
+end note
+IWL->MVM: iwl_op_mode_mvm_start
+MVM->K: ieee80211_alloc_hw
+K-->MVM:
+MVM->IDI: iwl_trans_idi_configure
+IDI-->MVM:
+MVM->IDI: iwl_trans_idi_start_hw
+note over IDI
+iwl_trans_idi_start_hw
+IMPLEMENTATION MISSING
+end note
+IDI-->MVM:
+note over MVM
+iwl_run_init_mvm_ucode
+. iwl_mvm_load_ucode_wait_alive
+end note
+MVM->IDI: iwl_trans_idi_start_fw
+note over IDI
+iwl_trans_idi_start_fw
+. iwl_idi_rx_init
+. iwl_idi_tx_init
+. iwl_idi_load_given_ucode
+end note
+note over IDI FW
+iwl_idi_load_given_ucode:
+. load the fw image to SRAM
+. release LMAC ARC from reset
+end note
+IDI-->MVM:
+note over MVM: waiting for alive
+note over FW: FW init flow
+FW-->MVM: ALIVE
+note over MVM: iwl_alive_fn
+MVM->IDI: iwl_trans_idi_fw_alive
+note over IDI: iwl_tx_start
+IDI-->MVM:
+note over MVM
+end of function:
+iwl_mvm_load_ucode_wait_alive
+end note
+
+note over MVM FW: iwl_send_bt_prio_tbl
+note over MVM FW: iwl_nvm_init
+note over MVM FW: iwl_send_tx_ant_cfg
+note over MVM FW: iwl_set_default_calibrations
+note over MVM FW: iwl_send_phy_cfg_cmd
+note right of FW
+Guy: shouldn't calibrations
+be in mac_start (up) flow?
+end note
+note over MVM: wait for calibration results
+note over FW: run init calibrating
+FW-->MVM: calibration results
+
+MVM->IDI: iwl_trans_stop_device
+IDI-->MVM:
+
+note over MVM
+end of function:
+iwl_run_init_mvm_ucode
+end note
+
+MVM-->IWL:
+
+note over K:\n

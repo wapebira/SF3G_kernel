@@ -1,0 +1,118 @@
+/*
+ * sofia: lcd-mipi_jdi_7wuxga.dtsi
+ * definition at "include/dt-bindings/sofiafb/sofia_fb.h"
+ */
+
+	display-timings {
+		native-mode = <&timing0>;
+		timing0: timing0 {		
+			screen-type = <SCREEN_MIPI>;
+			out-face = <OUT_P888>;
+			color-mode = <COLOR_RGB>;
+			clock-frequency = <144700000>;
+			hactive = <1200>;
+			vactive = <1920>;
+			hback-porch = <20>;
+			hfront-porch = <20>;
+			hsync-len = <12>;
+			vback-porch = <2>;
+			vfront-porch = <2>;
+			vsync-len = <2>;
+			hsync-active = <0>;
+			vsync-active = <0>;
+			de-active = <0>;
+			pixelclk-active = <0>;
+			swap-rb = <0>;
+			swap-rg = <0>;
+			swap-gb = <0>;
+		};
+	};
+
+	display-panel0 {
+		compatible = "intel,display";
+
+		/* intel,display-ramless = <1>; */
+		intel,display-fps = <60>;
+		intel,display-dc-clkrate = <297000000>;
+		intel,display-if-nblanes = <4>;
+		intel,display-vid-mode = "burst";
+		intel,display-vid-id = <0>;
+		intel,display-eot = <1>;
+		intel,display-gate = <1>;
+
+		gpio-power-on {
+			vhigh {
+				intel,gpio-type = "vhigh";
+				intel,gpio-value-delay = <1 0>;
+			};
+			vlow {
+				intel,gpio-type = "vlow";
+				intel,gpio-value-delay = <1 20>;
+			};
+			reset {
+				intel,gpio-type = "reset";
+				intel,gpio-value-delay = <1 20>;
+			};
+		};
+
+		gpio-power-off {
+			reset {
+				intel,gpio-type = "reset";
+				intel,gpio-value-delay = <0 20>;
+			};
+			vlow {
+				intel,gpio-type = "vlow";
+				intel,gpio-value-delay = <0 0>;
+			};
+			vhigh {
+				intel,gpio-type = "vhigh";
+				intel,gpio-value-delay = <0 20>;
+			};
+		};
+
+		/* cmd-init { }; */
+
+		cmd-sleep-in {
+			display-off {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x28>;
+				intel,cmd-delay = <20>;
+				intel,cmd-lp = <1>;
+			};
+			sleep-in {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x10>;
+				intel,cmd-delay = <80>;
+				intel,cmd-lp = <1>;
+			};
+
+			cmd1 {
+				intel,cmd-type = <0x23>;
+				intel,cmd-data = <0xB0 0x00>;
+				intel,cmd-delay = <80>;
+				intel,cmd-lp = <1>;
+			};
+
+			cmd2 {
+					intel,cmd-type = <0x23>;
+					intel,cmd-data = <0xB0 0x01>;
+					intel,cmd-delay = <80>;
+				intel,cmd-lp = <1>;
+			};
+		};
+
+		cmd-sleep-out {
+			sleep-out {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x29>;
+				intel,cmd-delay = <20>;
+				intel,cmd-lp = <1>;
+			};
+			display-on {
+				intel,cmd-type = <0x05>;
+				intel,cmd-data = <0x11>;
+				intel,cmd-delay = <120>;
+				intel,cmd-lp = <1>;
+			};
+		};
+	};
